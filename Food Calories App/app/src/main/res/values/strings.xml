@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">FoodCalories</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="today_calor">Today Calories</string>
+    <string name="kcal">1029 / 2500 Kcal</string>
+    <string name="you">You are doing Great</string>
+    <string name="your_lastest_food">Your Lastest Food</string>
+    <string name="foto_makanan">Foto Makanan</string>
+    <string name="food">Food</string>
+    <string name="_125_2000_kcal">+125 / 2000 Kcal</string>
+    <string name="articles">Articles</string>
+    <string name="articel_image">Articel Image</string>
+    <string name="apa_sih_kalori_dan_berapa_yang_kita_butuhkan">Apa Sih Kalori dan Berapa yang Kita Butuhkan?</string>
+    <string name="home">Home</string>
+    <string name="history">History</string>
+    <string name="add">Add</string>
+</resources>
