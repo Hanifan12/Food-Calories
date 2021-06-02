@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodcalories.databinding.FragmentHistoryBinding
+//error di aku ga tau salah dimananya
 import kotlinx.android.synthetic.main.fragment_history.*
 
 class HistoryFragment : Fragment() {
@@ -35,8 +36,8 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        panel.visibility = View.INVISIBLE
+        //ini panel untuk apa
+        binding.panel.visibility = View.INVISIBLE
 
         if (activity != null) {
             val viewModel = ViewModelProvider(this,
