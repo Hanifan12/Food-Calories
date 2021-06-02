@@ -29,9 +29,9 @@ def model_predict(img_path, model):
 
     preds = model.predict(images)
     if preds[0] > 0.5:
-      return "Gigi sehat."
+      return "......"
     else:
-      return "Gigi Karies."
+      return "------"
 
 @app.route('/')
 def index():
