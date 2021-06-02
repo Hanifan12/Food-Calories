@@ -25,4 +25,8 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#FFFBDF</item>
     </style>
+    <style name="article_text">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#FFFBDF</item>
+    </style>
 </resources>
