@@ -38,9 +38,9 @@ def model_predict(img_path, model):
 	
     label = ['chicken_wings', 'ice_cream', 'spaghetti']
     
-	predic_food = label[predic]
+	  predic_food = label[predic]
 	
-	return predic_food
+	  return predic_food
 
 #img = fn
 #img = cv2.imread(img) # reads image
