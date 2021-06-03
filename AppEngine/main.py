@@ -4,6 +4,8 @@ import tensorflow_hub as hub
 from tqdm import tqdm
 from werkzeug.utils import secure_filename
 import urllib.request
+import cv2
+import matplotlib.pyplot as plt
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing import image
@@ -34,6 +36,11 @@ def model_predict(img_path, model):
 
     predic = np.argmax(pred)
     print(predic)
+
+img = fn
+img = cv2.imread(img) # reads image
+plt.imshow(img)
+print('Image = ' + label[predic])
     
 
 @app.route('/')
