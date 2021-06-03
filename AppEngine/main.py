@@ -16,22 +16,25 @@ from flask import Flask, redirect, url_for, request, render_template, jsonify, f
 app = Flask(__name__)
 
 # Load your trained model
-model = tf.keras.models.load_model('food20class87acc.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+model = load_model('model3class_work.h5')
 model.make_predict_function()          # Necessary
 
+label = ['chicken_wings', 'ice_cream', 'spaghetti']
+
 def model_predict(img_path, model):
-    img = image.load_img(img_path, target_size=(224, 224))
+    img = image.load_img(img_path, target_size=(100, 100))
 
     # Preprocessing the image
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
-    images = np.vstack([x])/ 255.0
+    images = np.vstack([x])
 
-    preds = model.predict(images)
-    if preds[0] > 0.5:
-      return "......"
-    else:
-      return "------"
+    preds = model.predict(images)[0]
+    print(pred)
+
+    predic = np.argmax(pred)
+    print(predic)
+    
 
 @app.route('/')
 def index():
