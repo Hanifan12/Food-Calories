@@ -42,10 +42,10 @@ def model_predict(img_path, model):
 	
 	return predic_food
 
-img = fn
-img = cv2.imread(img) # reads image
-plt.imshow(img)
-print('Image = ' + label[predic])
+#img = fn
+#img = cv2.imread(img) # reads image
+#plt.imshow(img)
+#print('Image = ' + label[predic])
     
 
 @app.route('/')
