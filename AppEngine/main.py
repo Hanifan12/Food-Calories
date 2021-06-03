@@ -19,9 +19,8 @@ app = Flask(__name__)
 
 # Load your trained model
 model = load_model('model3class_work.h5')
-model.make_predict_function()          # Necessary
+#model.make_predict_function()          # Necessary
 
-label = ['chicken_wings', 'ice_cream', 'spaghetti']
 
 def model_predict(img_path, model):
     img = image.load_img(img_path, target_size=(100, 100))
@@ -32,10 +31,16 @@ def model_predict(img_path, model):
     images = np.vstack([x])
 
     preds = model.predict(images)[0]
-    print(pred)
+    #print(pred)
 
     predic = np.argmax(pred)
-    print(predic)
+    #print(predic)
+	
+    label = ['chicken_wings', 'ice_cream', 'spaghetti']
+    
+	predic_food = label[predic]
+	
+	return predic_food
 
 img = fn
 img = cv2.imread(img) # reads image
