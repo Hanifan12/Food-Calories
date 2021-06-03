@@ -1,9 +1,16 @@
 package com.capstone.foodcalories.ui.settings
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import com.capstone.foodcalories.R
+import android.content.SharedPreferences
+import android.widget.Toast
+import androidx.preference.Preference
+import androidx.preference.PreferenceManager
+import com.capstone.foodcalories.data.Food
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -17,14 +24,50 @@ class SettingsActivity : AppCompatActivity() {
                 .commit()
         }
 
+        val food = Food()
+
+        Toast.makeText(this, food.calorieTarget.toString(), Toast.LENGTH_SHORT).show()
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.settings)
 
     }
 
-    class SettingsFragment : PreferenceFragmentCompat() {
+    class SettingsFragment : PreferenceFragmentCompat(),
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        PreferenceManager.OnPreferenceTreeClickListener {
+        private var mContext: Context? = null
+        private lateinit var food: Food
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            val sp = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            sp.registerOnSharedPreferenceChangeListener(this)
+
+            preferenceManager.sharedPreferencesName = "calorieTarget"
+        }
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
+        }
+
+        // set calorie target nya masih belum bisa
+        override fun onSharedPreferenceChanged(
+            sharedPreferences: SharedPreferences?,
+            key: String?
+        ) {
+            if (key.equals("calorieTarget")) {
+                val pref: Preference? = this.findPreference(key!!)
+                pref?.summary = sharedPreferences!!.getString(key, "0")
+                setCalorieTarget(pref?.summary as String)
+            }
+
+        }
+
+        private fun setCalorieTarget(calorieTarget: String) {
+            val food = Food()
+            val ct = calorieTarget.toInt()
+            food.calorieTarget = ct
         }
     }
 }

@@ -1,6 +1,9 @@
 package com.capstone.foodcalories.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -9,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.foodcalories.R
 import com.capstone.foodcalories.databinding.ActivityMainBinding
+import com.capstone.foodcalories.ui.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,5 +36,17 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.option_menu, menu)
+        val settings: MenuItem? = menu?.findItem(R.id.btn_settings)
+        settings?.setOnMenuItemClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            this.startActivity(intent)
+            true
+        }
+
+        return super.onCreateOptionsMenu(menu)
     }
 }

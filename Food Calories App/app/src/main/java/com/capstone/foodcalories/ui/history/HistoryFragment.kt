@@ -1,21 +1,26 @@
 package com.capstone.foodcalories.ui.history
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.capstone.foodcalories.R
+import com.capstone.foodcalories.data.Food
 import com.capstone.foodcalories.databinding.FragmentHistoryBinding
+import com.capstone.foodcalories.ui.settings.SettingsActivity
 //error di aku ga tau salah dimananya
 import kotlinx.android.synthetic.main.fragment_history.*
+import kotlinx.android.synthetic.main.fragment_history.view.*
+import kotlinx.coroutines.Dispatchers.Main
 
 class HistoryFragment : Fragment() {
 
     private lateinit var historyViewModel: HistoryViewModel
     private var _binding: FragmentHistoryBinding? = null
     private lateinit var adapter: HistoryAdapter
+    private lateinit var food: Food
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,18 +31,25 @@ class HistoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
+
         historyViewModel =
             ViewModelProvider(this).get(HistoryViewModel::class.java)
 
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //ini panel untuk apa
-        binding.panel.visibility = View.INVISIBLE
+
+        val food = Food()
+        val calorieTarget = food.calorieTarget
+        if(calorieTarget > 0) {
+            view.panel.visibility = View.VISIBLE
+        } else {
+            binding.panel.visibility = View.INVISIBLE
+        }
 
         if (activity != null) {
             val viewModel = ViewModelProvider(this,

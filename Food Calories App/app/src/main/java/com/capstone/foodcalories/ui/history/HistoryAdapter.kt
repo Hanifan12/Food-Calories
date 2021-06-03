@@ -28,6 +28,10 @@ class HistoryAdapter(private val listFood: HistoryFragment) :
                     .load(food.image)
                     .into(foodImage)
 
+
+                if(food.calorieTarget != 0) {
+
+                }
             }
         }
     }

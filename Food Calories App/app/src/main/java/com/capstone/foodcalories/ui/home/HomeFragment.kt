@@ -47,6 +47,8 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        setHasOptionsMenu(true)
+
         return root
     }
 
