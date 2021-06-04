@@ -30,7 +30,6 @@ import com.capstone.foodcalories.ui.camera.ui.RecognitionAdapter
 import com.capstone.foodcalories.ui.camera.util.YuvToRgbConverter
 import com.capstone.foodcalories.ui.camera.viewmodel.Recognition
 import com.capstone.foodcalories.ui.camera.viewmodel.RecognitionListViewModel
-import com.capstone.foodcalories.ui.home.HomeFragment
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.model.Model
 import java.util.concurrent.Executors

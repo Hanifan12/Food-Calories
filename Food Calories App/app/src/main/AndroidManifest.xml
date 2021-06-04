@@ -18,6 +18,20 @@
         android:theme="@style/Theme.FoodCalories"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".ui.signin.SigninActivity"
+            android:exported="true"
+            android:theme="@style/Theme.FoodCalories.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:exported="true"
+            android:theme="@style/Theme.FoodCalories.NoActionBar"/>
+        <activity
             android:name=".ui.settings.SettingsActivity"
             android:exported="true"
             android:label="@string/title_activity_settings" />
@@ -28,11 +42,7 @@
             android:name=".ui.activity.MainActivity"
             android:exported="true"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
