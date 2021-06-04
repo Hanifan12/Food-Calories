@@ -24,9 +24,9 @@ class HistoryAdapter(private val listFood: HistoryFragment) :
                 calorie.text = food.calorie.toString()
                 calorieTarget.text = food.calorieTarget.toString()
 
-                Glide.with(itemView)
-                    .load(food.image)
-                    .into(foodImage)
+                //Glide.with(itemView)
+                //    .load(food.image)
+                //    .into(latest)
 
 
                 if(food.calorieTarget != 0) {

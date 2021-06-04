@@ -18,8 +18,9 @@ import com.capstone.foodcalories.ui.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
 
-    companion object{
-        const val EXTRA =""
+    companion object {
+        const val EXTRA_FOOD = ""
+        const val EXTRA_CALORIE = ""
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -29,16 +30,16 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val hasil = intent.getStringExtra(EXTRA)
-        if(hasil == ""){
-            Log.e("MainActivity","Data Kosong")
-        }else{
+        val hasil = intent.getStringExtra(EXTRA_FOOD)
+        if (hasil == "") {
+            Log.e("MainActivity", "Data Kosong")
+        } else {
             val frag = HomeFragment()
             val bundle = Bundle()
-            bundle.putString("hasil",hasil)
+            bundle.putString("hasil", hasil)
             frag.arguments = bundle
             supportFragmentManager.beginTransaction()
-                .add(R.id.nav_host_fragment_activity_main,frag)
+                .add(R.id.nav_host_fragment_activity_main, frag)
                 .commit()
         }
 

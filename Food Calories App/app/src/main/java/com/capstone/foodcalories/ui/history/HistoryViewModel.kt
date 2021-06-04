@@ -13,7 +13,7 @@ class HistoryViewModel : ViewModel() {
         return food
     }
 
-    fun setFoodItem(movieId: Int) {
+    fun setFoodItem(foodId: Int) {
 
     }
 }

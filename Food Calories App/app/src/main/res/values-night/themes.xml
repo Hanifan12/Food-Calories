@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.FoodCalories" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">#2f5d62</item>
+        <item name="colorPrimaryVariant">#5e8b7e</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,27 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="title1">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="card_text">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFBDF</item>
+    </style>
+    <style name="card2_title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FFFBDF</item>
+    </style>
+    <style name="article_text">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#FFFBDF</item>
+    </style>
+
+    <style name="highlighted_text">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 </resources>

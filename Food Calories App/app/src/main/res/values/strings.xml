@@ -20,6 +20,11 @@
     <string name="articles_from">articles_from</string>
     <string name="article_image">Article Image</string>
     <string name="take_photo">Take Photo</string>
+    <string name="today_calorie">Today\'s Calorie Intake</string>
+    <string name="calorie">0</string>
+    <string name="your_latest_food">Your Latest Food</string>
+    <string name="latest_food_calorie">0</string>
+    <string name="food_image">Food image</string>
 
     <string name="capture_button_alt">Capture</string>
     <string name="unknown">UNKNOWN</string>
@@ -27,7 +32,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pizza">Pizza</string>
     <string name="cal">140+</string>
-    <string name="per">/</string>
+    <string name="per">of</string>
     <string name="calorieTarget">2000</string>
     <string name="date">Today</string>
     <string name="permission_deny_text">Required permissions denied. Exiting.</string>

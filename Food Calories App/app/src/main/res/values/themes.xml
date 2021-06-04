@@ -33,4 +33,8 @@
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">#FFFBDF</item>
     </style>
+    <style name="highlighted_text">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 </resources>

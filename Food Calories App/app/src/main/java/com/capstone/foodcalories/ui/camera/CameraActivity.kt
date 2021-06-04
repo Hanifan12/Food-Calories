@@ -96,7 +96,7 @@ class CameraActivity : AppCompatActivity() {
         recogViewModel.recognitionList.observe(this,
             {
                 viewAdapter.submitList(it)
-                if(confident[0].toInt() > 5) {
+                if(confident[0].code > 5) {
 //                  val frag = HomeFragment()
 //                    val bundle = Bundle()
 //                    frag.arguments = bundle
@@ -105,7 +105,8 @@ class CameraActivity : AppCompatActivity() {
 //                        .add(R.id.atasan,frag)
 //                        .commit()
                     val intent = Intent(this@CameraActivity,MainActivity::class.java)
-                    intent.putExtra(MainActivity.EXTRA, makanan)
+                    intent.putExtra(MainActivity.EXTRA_FOOD, makanan)
+                    //intent.putExtra(MainActivity.EXTRA_CALORIE, calorie)
                     startActivity(intent)
                 }
             }

@@ -37,9 +37,9 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
         val hasil = arguments?.getString("hasil")
         if(hasil == null){
-            binding.kcal.text = "Kcal"
+            binding.latestFoodTitle.text = "Food"
         }else {
-            binding.kcal.text = "$hasil Kcal"
+            binding.latestFoodTitle.text = "$hasil"
         }
 
         homeViewModel.dataItem.observe(viewLifecycleOwner,{news ->
@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
             binding.articleFrom.text="CCN Indonesia"
             link = news[0].link
         })
-        binding.imagecard.setOnClickListener {
+        binding.imageCard.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(link)
             startActivity(intent)
