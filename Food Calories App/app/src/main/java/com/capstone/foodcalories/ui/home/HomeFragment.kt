@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         database = FirebaseDatabase.getInstance()
-        myRef = database.getReference("Food")
+        myRef = database.getReference("Users")
 
     }
 
@@ -48,8 +48,6 @@ class HomeFragment : Fragment() {
         val model = DatabaseModel(foodName, foodCalorie)
         val id = myRef.push().key
         myRef.child(id!!).setValue(model)
-        binding.latestFoodTitle.text = ""
-        binding.latestFoodCalorie.text = ""
 
     }
 

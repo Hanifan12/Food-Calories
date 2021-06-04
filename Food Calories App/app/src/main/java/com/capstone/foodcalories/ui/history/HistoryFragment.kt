@@ -30,7 +30,7 @@ class HistoryFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         database = FirebaseDatabase.getInstance()
-        myRef = database.getReference("Food")
+        myRef = database.getReference("Users")
         getData()
 
     }
