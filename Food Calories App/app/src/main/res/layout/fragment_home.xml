@@ -61,6 +61,7 @@
                         android:textAppearance="@style/card_text" />
 
                     <TextView
+                        android:id="@+id/calorie_target"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="6dp"

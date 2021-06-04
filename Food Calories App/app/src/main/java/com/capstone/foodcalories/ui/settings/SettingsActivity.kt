@@ -58,14 +58,14 @@ class SettingsActivity : AppCompatActivity() {
         ) {
             if (key.equals("calorieTarget")) {
                 val pref: Preference? = this.findPreference(key!!)
-                pref?.summary = sharedPreferences!!.getString(key, "0")
+                pref?.summary = sharedPreferences!!.getString(key, 0.toString())
                 setCalorieTarget(pref?.summary as String)
             }
 
         }
 
         private fun setCalorieTarget(calorieTarget: String) {
-            val food = Food()
+            val food = Food(calorieTarget = 0)
             val ct = calorieTarget.toInt()
             food.calorieTarget = ct
         }

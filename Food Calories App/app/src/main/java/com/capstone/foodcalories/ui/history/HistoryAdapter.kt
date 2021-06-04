@@ -3,54 +3,33 @@ package com.capstone.foodcalories.ui.history
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.capstone.foodcalories.data.Food
 import com.capstone.foodcalories.databinding.HistoryRowBinding
+import com.capstone.foodcalories.ui.db.DatabaseModel
 
-class HistoryAdapter(private val listFood: HistoryFragment) :
-    RecyclerView.Adapter<HistoryAdapter.ListViewHolder>() {
-    private val items = ArrayList<Food>()
+class HistoryAdapter(var list : ArrayList<DatabaseModel>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+    private lateinit var binding: HistoryRowBinding
 
-    fun setItems(items: Food) {
-        this.items.clear()
-        this.items.addAll(listOf(items))
+    class ViewHolder(binding: HistoryRowBinding) : RecyclerView.ViewHolder(binding.root) {
+        val foodName = binding.tvFoodName
+        val foodCalorie = binding.tvCalorie
+        val calorieTarget = binding.tvCalorieTarget
     }
 
-    inner class ListViewHolder(private val binding: HistoryRowBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(food: Food) {
-            with(binding) {
-                //foodName.text = food.name
-                calorie.text = food.calorie.toString()
-                //calorieTarget.text = food.calorieTarget.toString()
-
-                //Glide.with(itemView)
-                //    .load(food.image)
-                //    .into(latest)
-
-
-                if(food.calorieTarget != 0) {
-
-                }
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): HistoryAdapter.ListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: HistoryRowBinding =
             HistoryRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ListViewHolder(binding)
+        return ViewHolder(binding)
+
     }
 
-    override fun onBindViewHolder(holder: HistoryAdapter.ListViewHolder, position: Int) {
-        holder.bind(items[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.foodName.text = list[position].foodName
+        holder.foodCalorie.text = list[position].foodName
+        holder.calorieTarget.text = list[position].foodName
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return list.size
     }
 
 }
