@@ -20,9 +20,9 @@ class HistoryAdapter(private val listFood: HistoryFragment) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(food: Food) {
             with(binding) {
-                foodName.text = food.name
+                //foodName.text = food.name
                 calorie.text = food.calorie.toString()
-                calorieTarget.text = food.calorieTarget.toString()
+                //calorieTarget.text = food.calorieTarget.toString()
 
                 //Glide.with(itemView)
                 //    .load(food.image)

@@ -33,7 +33,7 @@
             android:layout_marginStart="12dp">
 
             <TextView
-                android:id="@+id/food_name"
+                android:id="@+id/tv_food_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -45,7 +45,7 @@
                 android:id="@+id/calorie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/food_name"
+                android:layout_below="@id/tv_food_name"
                 android:text="@string/cal"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -54,17 +54,17 @@
                 android:id="@+id/per"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/food_name"
-                android:layout_toEndOf="@id/food_name"
+                android:layout_below="@id/tv_food_name"
+                android:layout_toEndOf="@id/tv_food_name"
                 android:text="@string/per"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/calorie_target"
+                android:id="@+id/tv_calorie_target"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/food_name"
+                android:layout_below="@id/tv_food_name"
                 android:layout_marginStart="5dp"
                 android:layout_toEndOf="@id/per"
                 android:text="@string/calorieTarget"
@@ -74,9 +74,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/food_name"
+                android:layout_below="@id/tv_food_name"
                 android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/calorie_target"
+                android:layout_toEndOf="@id/tv_calorie_target"
                 android:text="@string/kcal"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
