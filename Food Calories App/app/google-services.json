@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "507158618549",
+    "project_id": "food-calories-315506",
+    "storage_bucket": "food-calories-315506.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507158618549:android:61c7a688df398919acb9fc",
+        "android_client_info": {
+          "package_name": "com.capstone.foodcalories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507158618549-b93i8lh2h6n2ga85eki12mib5ut9p3p7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8mXqcMuhIZKKE_LwZ5DrqAYi37DB8y1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507158618549-b93i8lh2h6n2ga85eki12mib5ut9p3p7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
