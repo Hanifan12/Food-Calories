@@ -2,6 +2,7 @@ package com.capstone.foodcalories.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,9 +13,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.foodcalories.R
 import com.capstone.foodcalories.databinding.ActivityMainBinding
+import com.capstone.foodcalories.ui.home.HomeFragment
 import com.capstone.foodcalories.ui.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
+
+    companion object{
+        const val EXTRA =""
+    }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -23,8 +29,21 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val hasil = intent.getStringExtra(EXTRA)
+        if(hasil == ""){
+            Log.e("MainActivity","Data Kosong")
+        }else{
+            val frag = HomeFragment()
+            val bundle = Bundle()
+            bundle.putString("hasil",hasil)
+            frag.arguments = bundle
+            supportFragmentManager.beginTransaction()
+                .add(R.id.nav_host_fragment_activity_main,frag)
+                .commit()
+        }
 
         val navView: BottomNavigationView = binding.navView
+
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
@@ -36,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

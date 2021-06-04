@@ -21,6 +21,9 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private var link = ""
+    companion object{
+        const val ARG_NAME = "name"
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -30,9 +33,15 @@ class HomeFragment : Fragment() {
     ): View {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val hasil = arguments?.getString("hasil")
+        if(hasil == null){
+            binding.kcal.text = "Kcal"
+        }else {
+            binding.kcal.text = "$hasil Kcal"
+        }
+
         homeViewModel.dataItem.observe(viewLifecycleOwner,{news ->
             binding.articleTitle.text = news[0].title
             Glide.with(this)

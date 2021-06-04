@@ -1,24 +1,9 @@
-/*
- * Copyright (C) 2020 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.capstone.foodcalories.ui.camera
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Matrix
@@ -40,15 +25,21 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodcalories.R
 import com.capstone.foodcalories.ml.RealModel
+import com.capstone.foodcalories.ui.activity.MainActivity
 import com.capstone.foodcalories.ui.camera.ui.RecognitionAdapter
 import com.capstone.foodcalories.ui.camera.util.YuvToRgbConverter
 import com.capstone.foodcalories.ui.camera.viewmodel.Recognition
 import com.capstone.foodcalories.ui.camera.viewmodel.RecognitionListViewModel
+import com.capstone.foodcalories.ui.home.HomeFragment
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.model.Model
 import java.util.concurrent.Executors
 import org.tensorflow.lite.gpu.CompatibilityList
 
+
+//needed
+private lateinit var makanan:String
+private lateinit var confident:String
 // Constants
 private const val MAX_RESULT_DISPLAY = 3 // Maximum number of results displayed
 private const val TAG = "TFL Classify" // Name for logging
@@ -68,7 +59,6 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var imageAnalyzer: ImageAnalysis // Analysis use case, for running ML code
     private lateinit var camera: Camera
     private val cameraExecutor = Executors.newSingleThreadExecutor()
-
     // Views attachment
     private val resultRecyclerView by lazy {
         findViewById<RecyclerView>(R.id.recognitionResults) // Display the result of analysis
@@ -107,10 +97,25 @@ class CameraActivity : AppCompatActivity() {
         recogViewModel.recognitionList.observe(this,
             {
                 viewAdapter.submitList(it)
+                if(confident[0].toInt() > 5) {
+//                  val frag = HomeFragment()
+//                    val bundle = Bundle()
+//                    frag.arguments = bundle
+//                    bundle.putString("hasil", makanan)
+//                    supportFragmentManager.beginTransaction()
+//                        .add(R.id.atasan,frag)
+//                        .commit()
+                    val intent = Intent(this@CameraActivity,MainActivity::class.java)
+                    intent.putExtra(MainActivity.EXTRA, makanan)
+                    startActivity(intent)
+                }
             }
         )
 
+
     }
+
+
 
     /**
      * Check all permissions are granted - use for Camera permission in this example.
@@ -134,10 +139,6 @@ class CameraActivity : AppCompatActivity() {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                // Exit the app if permission is not granted
-                // Best practice is to explain and offer a chance to re-request but this is out of
-                // scope in this sample. More details:
-                // https://developer.android.com/training/permissions/usage-notes
                 Toast.makeText(
                     this,
                     getString(R.string.permission_deny_text),
@@ -148,14 +149,7 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Start the Camera which involves:
-     *
-     * 1. Initialising the preview use case
-     * 2. Initialising the image analyser use case
-     * 3. Attach both to the lifecycle of this activity
-     * 4. Pipe the output of the preview object to the PreviewView on the screen
-     */
+
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
@@ -205,6 +199,8 @@ class CameraActivity : AppCompatActivity() {
             }
 
         }, ContextCompat.getMainExecutor(this))
+
+
     }
 
     private class ImageAnalyzer(ctx: Context, private val listener: RecognitionListener) :
@@ -247,18 +243,16 @@ class CameraActivity : AppCompatActivity() {
             for (output in outputs) {
                 items.add(Recognition(output.label, output.score))
             }
-
-//            // START - Placeholder code at the start of the codelab. Comment this block of code out.
-//            for (i in 0 until MAX_RESULT_DISPLAY){
-//                items.add(Recognition("Fake label $i", Random.nextFloat()))
-//            }
-//            // END - Placeholder code at the start of the codelab. Comment this block of code out.
-
             // Return the result
             listener(items.toList())
+            makanan = items[0].label
+            confident = items[0].probabilityString
 
             // Close the image,this tells CameraX to feed the next image to the analyzer
             imageProxy.close()
+
+
+
         }
 
         /**
@@ -300,5 +294,8 @@ class CameraActivity : AppCompatActivity() {
         }
 
     }
+
+
+
 
 }

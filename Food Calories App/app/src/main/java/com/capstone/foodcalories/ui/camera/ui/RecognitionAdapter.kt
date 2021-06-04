@@ -60,5 +60,6 @@ class RecognitionViewHolder(private val binding: RecognitionItemBinding) :
     fun bindTo(recognition: Recognition) {
         binding.recognitionItem = recognition
         binding.executePendingBindings()
+
     }
 }

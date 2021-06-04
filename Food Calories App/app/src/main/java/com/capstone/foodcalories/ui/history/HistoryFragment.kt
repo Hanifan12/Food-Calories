@@ -11,9 +11,9 @@ import com.capstone.foodcalories.data.Food
 import com.capstone.foodcalories.databinding.FragmentHistoryBinding
 import com.capstone.foodcalories.ui.settings.SettingsActivity
 //error di aku ga tau salah dimananya
-import kotlinx.android.synthetic.main.fragment_history.*
-import kotlinx.android.synthetic.main.fragment_history.view.*
-import kotlinx.coroutines.Dispatchers.Main
+//import kotlinx.android.synthetic.main.fragment_history.*
+//import kotlinx.android.synthetic.main.fragment_history.view.*
+//import kotlinx.coroutines.Dispatchers.Main
 
 class HistoryFragment : Fragment() {
 
@@ -46,14 +46,14 @@ class HistoryFragment : Fragment() {
         val food = Food()
         val calorieTarget = food.calorieTarget
         if(calorieTarget > 0) {
-            view.panel.visibility = View.VISIBLE
+            binding.panel.visibility = View.VISIBLE
         } else {
             binding.panel.visibility = View.INVISIBLE
         }
 
         if (activity != null) {
-            val viewModel = ViewModelProvider(this,
-                ViewModelProvider.NewInstanceFactory())[HistoryViewModel::class.java]
+//            val viewModel = ViewModelProvider(this,
+//                ViewModelProvider.NewInstanceFactory())[HistoryViewModel::class.java]
 
             //nunggu item nya masuk dulu
             //val foodItem = viewModel.getFoodItem()
