@@ -25,8 +25,8 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         val food = Food()
-
-        Toast.makeText(this, food.calorieTarget.toString(), Toast.LENGTH_SHORT).show()
+//
+//        Toast.makeText(this, food.calorieTarget.toString(), Toast.LENGTH_SHORT).show()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.settings)
@@ -58,16 +58,16 @@ class SettingsActivity : AppCompatActivity() {
         ) {
             if (key.equals("calorieTarget")) {
                 val pref: Preference? = this.findPreference(key!!)
-                pref?.summary = sharedPreferences!!.getString(key, "0")
+                pref?.summary = sharedPreferences!!.getString(key, 0.toString())
                 setCalorieTarget(pref?.summary as String)
             }
 
         }
 
         private fun setCalorieTarget(calorieTarget: String) {
-            val food = Food()
+            val food = Food(calorieTarget = 0)
             val ct = calorieTarget.toInt()
-            food.calorieTarget = ct
+//            food.calorieTarget = ct
         }
     }
 }

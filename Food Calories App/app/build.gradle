@@ -1,10 +1,9 @@
 plugins {
-    //dont use id 'kotlin extension' because it is depricated
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.firebase-perf'
 
 }
 
@@ -62,6 +61,8 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.0'
+    implementation 'com.google.firebase:firebase-database:20.0.0'
+    implementation 'com.google.firebase:firebase-perf:20.0.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -97,8 +98,6 @@ dependencies {
     // Add the dependency for the Firebase SDK for Google Analytics
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics'
-    // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-storage:20.0.0'
     // Declare the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies

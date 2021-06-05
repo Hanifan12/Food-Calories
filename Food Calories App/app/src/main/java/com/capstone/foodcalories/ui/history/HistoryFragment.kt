@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodcalories.data.Food
 import com.capstone.foodcalories.databinding.FragmentHistoryBinding
 import com.capstone.foodcalories.ui.db.DatabaseModel
@@ -30,9 +29,22 @@ class HistoryFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         database = FirebaseDatabase.getInstance()
-        myRef = database.getReference("Users")
+        myRef = database.reference
         getData()
 
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        historyViewModel =
+            ViewModelProvider(this).get(HistoryViewModel::class.java)
+
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     private fun getData() {
@@ -45,7 +57,7 @@ class HistoryFragment : Fragment() {
                 }
 
                 if (list.size > 0) {
-                    val adapter = DataAdapter(list)
+                    val adapter = HistoryAdapter(list)
                     binding.rvHistory.adapter = adapter
                 }
             }
@@ -57,18 +69,11 @@ class HistoryFragment : Fragment() {
         })
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setHasOptionsMenu(true)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        historyViewModel =
-            ViewModelProvider(this).get(HistoryViewModel::class.java)
-
-        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
-        return binding.root
+        val viewModel = ViewModelProvider(this,
+            ViewModelProvider.NewInstanceFactory())[HistoryViewModel::class.java]
     }
 
     override fun onDestroyView() {

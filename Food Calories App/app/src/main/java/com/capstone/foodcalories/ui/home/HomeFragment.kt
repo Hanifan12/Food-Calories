@@ -7,13 +7,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.capstone.foodcalories.data.Food
 import com.capstone.foodcalories.databinding.FragmentHomeBinding
 import com.capstone.foodcalories.ui.db.DatabaseModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+
+
 
 class HomeFragment : Fragment() {
 
@@ -26,29 +30,35 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private var link = ""
-    companion object{
-        const val ARG_NAME = "name"
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         database = FirebaseDatabase.getInstance()
-        myRef = database.getReference("Users")
-
+        myRef = database.getReference("FoodHistory")
+        myRef = database.reference
     }
 
     //ini kurang tau naro nya di file mana
     private fun sendFoodData() {
         val hasil = arguments?.getString("hasil")
+        binding.latestFoodTitle.text = hasil
 
-        val foodName = binding.latestFoodTitle.text.toString().trim()
-        val foodCalorie = binding.latestFoodCalorie.text.toString().trim()
+        if(hasil == null) {
+            Toast.makeText(context, "nilai null", Toast.LENGTH_SHORT).show()
+        }
 
-        val model = DatabaseModel(foodName, foodCalorie)
+        val foodName = binding.latestFoodTitle.text.toString()
+        val foodCalorie = binding.latestFoodCalorie.text.toString()
+        val myRef = database.getReference("food")
+
+        val model = DatabaseModel(foodName)
         val id = myRef.push().key
         myRef.child(id!!).setValue(model)
-
+        .addOnCompleteListener {
+            Toast.makeText(context, "$hasil sent", Toast.LENGTH_SHORT).show()
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -85,11 +95,9 @@ class HomeFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        return root
-    }
+        val food = Food()
+        binding.calorieTarget.text = food.calorieTarget.toString()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return root
     }
 }

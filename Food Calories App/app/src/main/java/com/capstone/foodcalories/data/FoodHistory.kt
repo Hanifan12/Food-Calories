@@ -1,20 +1,19 @@
 package com.capstone.foodcalories.data
 
-import android.os.Parcelable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.google.firebase.database.IgnoreExtraProperties
+import com.google.firebase.database.PropertyName
 
-@Entity(tableName = "db_foodhistory")
-@kotlinx.parcelize.Parcelize
+
+@IgnoreExtraProperties
 data class FoodHistory(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    var id: Int = 0,
-    @ColumnInfo(name = "name")
-    var name: String = "",
-    @ColumnInfo(name = "calories")
-    var calories: Int = 0,
-    @ColumnInfo(name = "tanggal")
-    var tanggal :String =""
-    ):Parcelable
+    @PropertyName("name")
+    val name: String? = null,
+    @PropertyName("calories")
+    val calories: String? = null,
+    @PropertyName("userId")
+    val userId:String? = null,
+    @PropertyName("date")
+    val date :String? =null
+    ){
+
+}

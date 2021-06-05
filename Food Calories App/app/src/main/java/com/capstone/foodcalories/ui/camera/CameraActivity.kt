@@ -25,26 +25,30 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodcalories.R
 import com.capstone.foodcalories.ml.RealModel
+import com.capstone.foodcalories.model.local.FoodData
 import com.capstone.foodcalories.ui.activity.MainActivity
 import com.capstone.foodcalories.ui.camera.ui.RecognitionAdapter
 import com.capstone.foodcalories.ui.camera.util.YuvToRgbConverter
 import com.capstone.foodcalories.ui.camera.viewmodel.Recognition
 import com.capstone.foodcalories.ui.camera.viewmodel.RecognitionListViewModel
+import com.capstone.foodcalories.ui.db.DatabaseModel
 import com.google.firebase.database.FirebaseDatabase
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.model.Model
 import java.util.concurrent.Executors
 import org.tensorflow.lite.gpu.CompatibilityList
+import java.util.*
 
 
-//needed
-private lateinit var makanan:String
-private lateinit var confident:String
+
 // Constants
 private const val MAX_RESULT_DISPLAY = 3 // Maximum number of results displayed
-private const val TAG = "TFL Classify" // Name for logging
+private const val TAG = "Food Calories" // Name for logging
 private const val REQUEST_CODE_PERMISSIONS = 999 // Return code after asking for permission
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA) // permission needed
+//needed
+private var makanan:String = ""
+private var confident:String = ""
 
 // Listener for the result of the ImageAnalyzer
 typealias RecognitionListener = (recognition: List<Recognition>) -> Unit
@@ -52,6 +56,7 @@ typealias RecognitionListener = (recognition: List<Recognition>) -> Unit
 /**
  * Main entry point into TensorFlow Lite Classifier
  */
+
 class CameraActivity : AppCompatActivity() {
 
     // CameraX variables
@@ -70,9 +75,11 @@ class CameraActivity : AppCompatActivity() {
     // Contains the recognition result. Since  it is a viewModel, it will survive screen rotations
     private val recogViewModel: RecognitionListViewModel by viewModels()
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+//         database = Firebase.database.reference
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -82,7 +89,6 @@ class CameraActivity : AppCompatActivity() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
-
         // Initialising the resultRecyclerView and its linked viewAdaptor
         val viewAdapter = RecognitionAdapter(this)
         resultRecyclerView.adapter = viewAdapter
@@ -97,23 +103,16 @@ class CameraActivity : AppCompatActivity() {
         recogViewModel.recognitionList.observe(this,
             {
                 viewAdapter.submitList(it)
-                if(confident[0].code > 5) {
-//                  val frag = HomeFragment()
-//                    val bundle = Bundle()
-//                    frag.arguments = bundle
-//                    bundle.putString("hasil", makanan)
-//                    supportFragmentManager.beginTransaction()
-//                        .add(R.id.atasan,frag)
-//                        .commit()
+
+                if(confident[0] >= '5') {
                     val intent = Intent(this@CameraActivity,MainActivity::class.java)
-                    intent.putExtra(MainActivity.EXTRA_FOOD, makanan)
-                    //intent.putExtra(MainActivity.EXTRA_CALORIE, calorie)
+                    intent.putExtra(MainActivity.EXTRA_FOOD, makanan )
                     startActivity(intent)
                 }
+
             }
         )
     }
-
 
     /**
      * Check all permissions are granted - use for Camera permission in this example.

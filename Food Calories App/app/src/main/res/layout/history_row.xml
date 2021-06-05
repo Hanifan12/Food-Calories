@@ -1,85 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="120dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="10dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/card_color"
+    app:cardCornerRadius="20dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="12dp">
 
-    <View
-        android:id="@+id/summary_card"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginHorizontal="15dp"
-        android:background="@drawable/card"
-        tools:ignore="MissingConstraints" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:paddingVertical="20dp">
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/food_image"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
             android:background="@drawable/card"
             android:scaleType="center"
             android:src="@drawable/pizza" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="20dp"
+            android:layout_toEndOf="@id/food_image"
+            android:layout_marginStart="16dp">
 
             <TextView
                 android:id="@+id/tv_food_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginVertical="4dp"
                 android:text="@string/pizza"
                 android:textColor="@color/white"
-                android:textSize="22sp" />
+                android:textAppearance="@style/highlighted_text" />
 
-            <TextView
-                android:id="@+id/calorie"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_food_name"
-                android:text="@string/cal"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:layout_below="@id/tv_food_name">
 
-            <TextView
-                android:id="@+id/per"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_food_name"
-                android:layout_toEndOf="@id/tv_food_name"
-                android:text="@string/per"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_calorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calorie"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="5dp"/>
 
-            <TextView
-                android:id="@+id/tv_calorie_target"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_food_name"
-                android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/per"
-                android:text="@string/calorieTarget"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/per"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/per"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_food_name"
-                android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/tv_calorie_target"
-                android:text="@string/kcal"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_calorie_target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/calorieTarget"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/kcal"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </RelativeLayout>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
