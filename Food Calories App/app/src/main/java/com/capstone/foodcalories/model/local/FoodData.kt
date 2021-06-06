@@ -1,5 +1,6 @@
 package com.capstone.foodcalories.model.local
 
+import com.capstone.foodcalories.R
 import com.capstone.foodcalories.data.Food
 
 object FoodData {
@@ -8,7 +9,7 @@ object FoodData {
         foods.add(
             Food(1,
                 "ice_cream",
-                "http://colorfulkitchentales.com/wp-content/uploads/2019/06/DSC_2248-e1573390105291.jpg",
+                R.drawable.ice_cream,
                 208
             )
         )
@@ -16,15 +17,16 @@ object FoodData {
         foods.add(
             Food(2,
                 "chicken_wings",
-                "https://graphics8.nytimes.com/images/2016/02/09/dining/09COOKING_CHICKENWINGS2/09COOKING_CHICKENWINGS2-superJumbo.jpg",
+                R.drawable.wings,
                 220
+
             )
         )
 
         foods.add(
             Food(3,
             "spaghetti",
-            "https://www.fortatkinsonclub.org/wp-content/uploads/2019/08/Spaghetti_landscape-scaled.jpg",
+            R.drawable.spaghetti,
             157)
         )
 

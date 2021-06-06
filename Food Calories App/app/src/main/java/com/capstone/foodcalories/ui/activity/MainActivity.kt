@@ -20,13 +20,13 @@ import com.capstone.foodcalories.databinding.ActivityMainBinding
 import com.capstone.foodcalories.model.local.FoodData
 import com.capstone.foodcalories.ui.settings.SettingsActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -90,7 +90,6 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                 }
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

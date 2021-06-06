@@ -1,10 +1,13 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditTextPreference
+    <SeekBarPreference
         app:key="calorieTarget"
         app:title="@string/set_calorie_target"
         app:useSimpleSummaryProvider="true"
-        android:inputType="number"/>
+        app:showSeekBarValue="true"
+        app:iconSpaceReserved="false"
+        android:max="2000"
+        app:min="0"/>
 
 </PreferenceScreen>
