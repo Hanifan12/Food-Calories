@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.capstone.foodcalories.data.Food
 import com.capstone.foodcalories.databinding.FragmentHomeBinding
-import com.capstone.foodcalories.ui.db.DatabaseModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -40,26 +39,26 @@ class HomeFragment : Fragment() {
         myRef = database.reference
     }
 
-    //ini kurang tau naro nya di file mana
-    private fun sendFoodData() {
-        val hasil = arguments?.getString("hasil")
-        binding.latestFoodTitle.text = hasil
-
-        if(hasil == null) {
-            Toast.makeText(context, "nilai null", Toast.LENGTH_SHORT).show()
-        }
-
-        val foodName = binding.latestFoodTitle.text.toString()
-        val foodCalorie = binding.latestFoodCalorie.text.toString()
-        val myRef = database.getReference("food")
-
-        val model = DatabaseModel(foodName)
-        val id = myRef.push().key
-        myRef.child(id!!).setValue(model)
-        .addOnCompleteListener {
-            Toast.makeText(context, "$hasil sent", Toast.LENGTH_SHORT).show()
-        }
-    }
+//    //ini kurang tau naro nya di file mana
+//    private fun sendFoodData() {
+//        val hasil = arguments?.getString("hasil")
+//        binding.latestFoodTitle.text = hasil
+//
+//        if(hasil == null) {
+//            Toast.makeText(context, "nilai null", Toast.LENGTH_SHORT).show()
+//        }
+//
+//        val foodName = binding.latestFoodTitle.text.toString()
+//        val foodCalorie = binding.latestFoodCalorie.text.toString()
+//        val myRef = database.getReference("food")
+//
+//        val model = DatabaseModel(foodName)
+//        val id = myRef.push().key
+//        myRef.child(id!!).setValue(model)
+//        .addOnCompleteListener {
+//            Toast.makeText(context, "$hasil sent", Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -76,7 +75,7 @@ class HomeFragment : Fragment() {
             binding.latestFoodTitle.text = "Food"
         }else {
             binding.latestFoodTitle.text = "$hasil"
-            sendFoodData()
+
         }
 
         homeViewModel.dataItem.observe(viewLifecycleOwner,{news ->

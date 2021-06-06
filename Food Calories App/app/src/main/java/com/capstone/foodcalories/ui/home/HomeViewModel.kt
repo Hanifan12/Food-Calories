@@ -31,7 +31,7 @@ class HomeViewModel : ViewModel() {
         getDataFromAPI()
     }
 
-    fun getDataFromAPI(){
+    private fun getDataFromAPI(){
         _isLoading.value = true
         val client = RetrofitConfig.create().getNewsCCNType(type)
         client.enqueue(object: Callback<NewsResponse>{
@@ -51,5 +51,7 @@ class HomeViewModel : ViewModel() {
         })
     }
 
+    private fun getCalories() {
 
+    }
 }

@@ -3,42 +3,19 @@ package com.capstone.foodcalories.ui.history
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.capstone.foodcalories.data.FoodHistory
 import com.capstone.foodcalories.databinding.HistoryRowBinding
-import com.capstone.foodcalories.ui.db.DatabaseModel
 
-class HistoryAdapter(var list : ArrayList<DatabaseModel>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+class HistoryAdapter(private var list: ArrayList<FoodHistory>) :
+    RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     private lateinit var binding: HistoryRowBinding
 
     class ViewHolder(binding: HistoryRowBinding) : RecyclerView.ViewHolder(binding.root) {
         val foodName = binding.tvFoodName
         val foodCalorie = binding.tvCalorie
-        val calorieTarget = binding.tvCalorieTarget
+        val date = binding.date
     }
 
-    inner class ListViewHolder(private val binding: HistoryRowBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(food: Food) {
-            with(binding) {
-                //foodName.text = food.name
-                calorie.text = food.calorie.toString()
-                //calorieTarget.text = food.calorieTarget.toString()
-
-                //Glide.with(itemView)
-                //    .load(food.image)
-                //    .into(latest)
-
-
-//                if(food.calorieTarget != 0) {
-//
-//                }
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): HistoryAdapter.ListViewHolder {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: HistoryRowBinding =
             HistoryRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -47,13 +24,13 @@ class HistoryAdapter(var list : ArrayList<DatabaseModel>): RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.foodName.text = list[position].foodName
-        holder.foodCalorie.text = list[position].foodName
-        holder.calorieTarget.text = list[position].foodName
+        holder.foodName.text = list[position].name
+        holder.foodCalorie.text = list[position].calories
+        holder.date.text = list[position].date
+
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
-
 }

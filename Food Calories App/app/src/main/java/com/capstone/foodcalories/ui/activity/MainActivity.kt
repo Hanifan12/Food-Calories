@@ -78,11 +78,11 @@ class MainActivity : AppCompatActivity() {
             } else {
                 TODO("VERSION.SDK_INT < O")
             }
-            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS")
-            val formated = current.format(formatter).toString()
-            val formData = FoodHistory(makanan,calories,currentUser,formated)
+            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+            val timeFormat = current.format(formatter).toString()
+            val formData = FoodHistory(makanan,calories,currentUser,timeFormat)
             val foodId = myRef.push().key
-            myRef.child(foodId!!).setValue(formData).addOnCompleteListener {
+            myRef.child(currentUser).child(foodId!!).setValue(formData).addOnCompleteListener {
                 Toast.makeText(
                     this,
                     "Data $makanan Telah Ditambahkan",

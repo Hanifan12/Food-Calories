@@ -31,7 +31,6 @@ import com.capstone.foodcalories.ui.camera.ui.RecognitionAdapter
 import com.capstone.foodcalories.ui.camera.util.YuvToRgbConverter
 import com.capstone.foodcalories.ui.camera.viewmodel.Recognition
 import com.capstone.foodcalories.ui.camera.viewmodel.RecognitionListViewModel
-import com.capstone.foodcalories.ui.db.DatabaseModel
 import com.google.firebase.database.FirebaseDatabase
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.model.Model
