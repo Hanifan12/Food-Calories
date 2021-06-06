@@ -36,8 +36,6 @@ class HomeFragment : Fragment() {
     private var latestFoodTitle = ""
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -137,8 +135,6 @@ class HomeFragment : Fragment() {
                 for (data in snapshot.children) {
                     val model = data.getValue(FoodHistory::class.java)
                     list.add(0, FoodHistory())
-
-
 
                     if (model!!.name == "ice_cream") {
                         model.name = "Ice Cream"
