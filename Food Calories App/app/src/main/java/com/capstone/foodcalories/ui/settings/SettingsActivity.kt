@@ -11,7 +11,6 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import com.capstone.foodcalories.data.Food
 
-
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +22,6 @@ class SettingsActivity : AppCompatActivity() {
                 .replace(R.id.settings, SettingsFragment())
                 .commit()
         }
-
-        val food = Food()
-//
-//        Toast.makeText(this, food.calorieTarget.toString(), Toast.LENGTH_SHORT).show()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.settings)
@@ -51,7 +46,6 @@ class SettingsActivity : AppCompatActivity() {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
         }
 
-        // set calorie target nya masih belum bisa
         override fun onSharedPreferenceChanged(
             sharedPreferences: SharedPreferences?,
             key: String?
@@ -60,14 +54,14 @@ class SettingsActivity : AppCompatActivity() {
                 val pref: Preference? = this.findPreference(key!!)
                 pref?.summary = sharedPreferences!!.getString(key, 0.toString())
                 setCalorieTarget(pref?.summary as String)
-            }
 
+            }
         }
 
         private fun setCalorieTarget(calorieTarget: String) {
             val food = Food(calorieTarget = 0)
             val ct = calorieTarget.toInt()
-//            food.calorieTarget = ct
+
         }
     }
 }

@@ -13,6 +13,6 @@ data class FoodHistory(
     val userId:String? = null,
     @PropertyName("date")
     var date :String? =null,
-
+    var foodImage: Int? = null,
     var calorieTarget :String? =null
     )

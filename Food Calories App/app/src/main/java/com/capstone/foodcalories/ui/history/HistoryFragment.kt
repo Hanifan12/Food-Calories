@@ -112,6 +112,7 @@ class HistoryFragment : Fragment() {
             val myRef = FirebaseDatabase.getInstance().getReference("FoodHistory").child(userUid)
 
             myRef.removeValue()
+            onDestroyView()
         }
     }
 

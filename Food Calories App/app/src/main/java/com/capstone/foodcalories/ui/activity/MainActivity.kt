@@ -20,8 +20,11 @@ import com.capstone.foodcalories.databinding.ActivityMainBinding
 import com.capstone.foodcalories.model.local.FoodData
 import com.capstone.foodcalories.ui.settings.SettingsActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -91,6 +94,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        getCurrentCalorie()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -103,5 +108,37 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun getCurrentCalorie() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val userUid = user!!.uid
+
+        val myRef = FirebaseDatabase.getInstance().getReference("FoodHistory")
+            .child(userUid).child("calories")
+
+        var calorie = 0
+
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val list = ArrayList<FoodHistory>()
+                for (data in snapshot.children) {
+                    val model = data.getValue(FoodHistory::class.java)
+                    list.add(model as FoodHistory)
+
+                    Toast.makeText(this@MainActivity, "${list.size}", Toast.LENGTH_SHORT).show()
+
+                    if (list.size > 0) {
+                        for (i in 0 until list.size) {
+
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("cancel", error.toString())
+            }
+        })
     }
 }
