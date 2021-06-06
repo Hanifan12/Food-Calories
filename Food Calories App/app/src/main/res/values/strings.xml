@@ -46,5 +46,6 @@
     <string name="or">Or</string>
     <string name="sign_in">Sign In</string>
     <string name="base">Base</string>
+    <string name="data_belum_ada">Data belum ada</string>
 
 </resources>

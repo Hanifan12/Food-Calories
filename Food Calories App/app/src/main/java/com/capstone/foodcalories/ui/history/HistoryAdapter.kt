@@ -13,6 +13,7 @@ class HistoryAdapter(private var list: ArrayList<FoodHistory>) :
     class ViewHolder(binding: HistoryRowBinding) : RecyclerView.ViewHolder(binding.root) {
         val foodName = binding.tvFoodName
         val foodCalorie = binding.tvCalorie
+        val calorieTarget = binding.tvCalorieTarget
         val date = binding.date
     }
 
@@ -26,6 +27,7 @@ class HistoryAdapter(private var list: ArrayList<FoodHistory>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.foodName.text = list[position].name
         holder.foodCalorie.text = list[position].calories
+        holder.calorieTarget.text = list[position].calorieTarget
         holder.date.text = list[position].date
 
     }
@@ -33,4 +35,5 @@ class HistoryAdapter(private var list: ArrayList<FoodHistory>) :
     override fun getItemCount(): Int {
         return list.size
     }
+
 }

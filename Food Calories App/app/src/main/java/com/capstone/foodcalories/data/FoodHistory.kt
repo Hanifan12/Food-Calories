@@ -12,5 +12,7 @@ data class FoodHistory(
     @PropertyName("userId")
     val userId:String? = null,
     @PropertyName("date")
-    var date :String? =null
+    var date :String? =null,
+
+    var calorieTarget :String? =null
     )
