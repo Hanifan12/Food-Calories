@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private var link = ""
+    private var currentCalorie = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,5 +83,44 @@ class HomeFragment : Fragment() {
         binding.calorieTarget.text = food.calorieTarget.toString()
 
         return root
+    }
+
+    private fun getCurrentCalorie() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val userUid = user!!.uid
+
+        val myRef = FirebaseDatabase.getInstance().getReference("FoodHistory").child(userUid)
+        val list = ArrayList<FoodHistory>()
+
+
+        myRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                currentCalorie = 0
+                for (data in snapshot.children) {
+                    val model = data.getValue(FoodHistory::class.java)
+                    list.add(model as FoodHistory)
+
+                    if (list.size > 0) {
+                        for(i in 0 until list.size) {
+                            currentCalorie += model.calories!!.toInt()
+                        }
+
+                    } else
+                        makeText(context, "Data kalori belum keluar", Toast.LENGTH_SHORT).show()
+                }
+
+                binding.todayCalorie.text = currentCalorie.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("cancel", error.toString())
+            }
+        })
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getCurrentCalorie()
     }
 }

@@ -29,9 +29,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
-
-
-
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -93,9 +90,6 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }
         }
-
-        getCurrentCalorie()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -108,37 +102,5 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onCreateOptionsMenu(menu)
-    }
-
-    private fun getCurrentCalorie() {
-        val user = FirebaseAuth.getInstance().currentUser
-        val userUid = user!!.uid
-
-        val myRef = FirebaseDatabase.getInstance().getReference("FoodHistory")
-            .child(userUid).child("calories")
-
-        var calorie = 0
-
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val list = ArrayList<FoodHistory>()
-                for (data in snapshot.children) {
-                    val model = data.getValue(FoodHistory::class.java)
-                    list.add(model as FoodHistory)
-
-                    Toast.makeText(this@MainActivity, "${list.size}", Toast.LENGTH_SHORT).show()
-
-                    if (list.size > 0) {
-                        for (i in 0 until list.size) {
-
-                        }
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("cancel", error.toString())
-            }
-        })
     }
 }
