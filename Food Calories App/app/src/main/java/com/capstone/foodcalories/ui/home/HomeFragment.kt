@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide
 import com.capstone.foodcalories.data.Food
 import com.capstone.foodcalories.data.FoodHistory
 import com.capstone.foodcalories.databinding.FragmentHomeBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -33,6 +32,10 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private var link = ""
     private var currentCalorie = 0
+    private var latestFoodCalorie = ""
+    private var latestFoodTitle = ""
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,7 +96,7 @@ class HomeFragment : Fragment() {
         val list = ArrayList<FoodHistory>()
 
 
-        myRef.addValueEventListener(object : ValueEventListener{
+        myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 currentCalorie = 0
                 for (data in snapshot.children) {
@@ -101,7 +104,7 @@ class HomeFragment : Fragment() {
                     list.add(model as FoodHistory)
 
                     if (list.size > 0) {
-                        for(i in 0 until list.size) {
+                        for (i in 0 until list.size) {
                             currentCalorie += model.calories!!.toInt()
                         }
 
@@ -110,6 +113,51 @@ class HomeFragment : Fragment() {
                 }
 
                 binding.todayCalorie.text = currentCalorie.toString()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("cancel", error.toString())
+            }
+        })
+
+    }
+
+    private fun getLatestFood() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val userUid = user!!.uid
+
+        val myRef = FirebaseDatabase.getInstance().getReference("FoodHistory").child(userUid)
+        val list = ArrayList<FoodHistory>()
+
+
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                currentCalorie = 0
+                for (data in snapshot.children) {
+                    val model = data.getValue(FoodHistory::class.java)
+                    list.add(0, FoodHistory())
+
+
+
+                    if (model!!.name == "ice_cream") {
+                        model.name = "Ice Cream"
+                    }
+
+                    if (model.name == "spaghetti") {
+                        model.name = "Spaghetti"
+                    }
+
+                    if (model.name == "chicken_wings") {
+                        model.name = "Chicken Wings"
+                    }
+
+                    latestFoodTitle = model.name.toString()
+                    latestFoodCalorie = model.calories.toString()
+                }
+
+                binding.latestFoodTitle.text = latestFoodTitle
+                binding.latestFoodCalorie.text = latestFoodCalorie
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -122,5 +170,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCurrentCalorie()
+        getLatestFood()
     }
 }
