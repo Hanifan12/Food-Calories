@@ -62,14 +62,14 @@ class MainActivity : AppCompatActivity() {
 
         val makanan = intent.getStringExtra(EXTRA_FOOD)
 
-        if(makanan == "extra" || makanan == null  || makanan ==""){
+        if(makanan == "extra" || makanan == null  || makanan =="""""" || makanan ==""){
             Log.e("MainActivity","Gagal Load Data makanan dan calories")
         }else{
-
             val data = FoodData.generateFoodData()
             for(i in 0..data.lastIndex){
                 if(data[i].name == makanan){
                     calories = data[i].calorie.toString()
+                    break
                 }
             }
             val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
@@ -82,13 +82,13 @@ class MainActivity : AppCompatActivity() {
             val timeFormat = current.format(formatter).toString()
             val formData = FoodHistory(makanan,calories,currentUser,timeFormat)
             val foodId = myRef.push().key
-            myRef.child(currentUser).child(foodId!!).setValue(formData).addOnCompleteListener {
-                Toast.makeText(
-                    this,
-                    "Data $makanan Telah Ditambahkan",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+                myRef.child(currentUser).child(foodId!!).setValue(formData).addOnCompleteListener {
+                    Toast.makeText(
+                        this,
+                        "Data $makanan Telah Ditambahkan",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
         }
 
     }

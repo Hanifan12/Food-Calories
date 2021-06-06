@@ -25,13 +25,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodcalories.R
 import com.capstone.foodcalories.ml.RealModel
-import com.capstone.foodcalories.model.local.FoodData
 import com.capstone.foodcalories.ui.activity.MainActivity
 import com.capstone.foodcalories.ui.camera.ui.RecognitionAdapter
 import com.capstone.foodcalories.ui.camera.util.YuvToRgbConverter
 import com.capstone.foodcalories.ui.camera.viewmodel.Recognition
 import com.capstone.foodcalories.ui.camera.viewmodel.RecognitionListViewModel
-import com.google.firebase.database.FirebaseDatabase
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.model.Model
 import java.util.concurrent.Executors
@@ -102,14 +100,13 @@ class CameraActivity : AppCompatActivity() {
         recogViewModel.recognitionList.observe(this,
             {
                 viewAdapter.submitList(it)
-
-                if(confident[0] >= '5') {
+                if(confident[0] >= '3') {
                     val intent = Intent(this@CameraActivity,MainActivity::class.java)
                     intent.putExtra(MainActivity.EXTRA_FOOD, makanan )
                     startActivity(intent)
                 }
-
             }
+
         )
     }
 

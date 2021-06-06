@@ -5,6 +5,8 @@ import com.google.firebase.database.PropertyName
 
 @IgnoreExtraProperties
 data class FoodHistory(
+    @PropertyName("id")
+    var id: String? = null,
     @PropertyName("name")
     var name: String? = null,
     @PropertyName("calories")

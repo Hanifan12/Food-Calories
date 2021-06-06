@@ -4,61 +4,61 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.capstone.foodcalories.data.Food
+import com.capstone.foodcalories.data.FoodHistory
 import com.capstone.foodcalories.databinding.FragmentHomeBinding
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.capstone.foodcalories.model.local.FoodData
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseError
 
+import com.google.firebase.database.DataSnapshot
+
+import com.google.firebase.database.ValueEventListener
 
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-    private lateinit var database: FirebaseDatabase
-    private lateinit var myRef: DatabaseReference
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
     private var link = ""
+    private var image =""
+    private lateinit var list : ArrayList<FoodHistory>
 
+
+//    private fun getUserData(){
+//
+//        val database = FirebaseDatabase.getInstance()
+//        val myRef = database.getReference("FoodHistory")
+//        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+//        myRef.child(userId).addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                list = snapshot.getValue(FoodHistory)
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                // Failed to read value
+//                Log.w("firebase", "Failed to read value.", error.toException())
+//            }
+//        })
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        database = FirebaseDatabase.getInstance()
-        myRef = database.getReference("FoodHistory")
-        myRef = database.reference
+//        getUserData()
     }
-
-//    //ini kurang tau naro nya di file mana
-//    private fun sendFoodData() {
-//        val hasil = arguments?.getString("hasil")
-//        binding.latestFoodTitle.text = hasil
-//
-//        if(hasil == null) {
-//            Toast.makeText(context, "nilai null", Toast.LENGTH_SHORT).show()
-//        }
-//
-//        val foodName = binding.latestFoodTitle.text.toString()
-//        val foodCalorie = binding.latestFoodCalorie.text.toString()
-//        val myRef = database.getReference("food")
-//
-//        val model = DatabaseModel(foodName)
-//        val id = myRef.push().key
-//        myRef.child(id!!).setValue(model)
-//        .addOnCompleteListener {
-//            Toast.makeText(context, "$hasil sent", Toast.LENGTH_SHORT).show()
-//        }
-//    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -70,13 +70,19 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val hasil = arguments?.getString("hasil")
-        if(hasil == null){
-            binding.latestFoodTitle.text = "Food"
-        }else {
-            binding.latestFoodTitle.text = "$hasil"
+//        val foodData = FoodData.generateFoodData()
+//        binding.latestFoodTitle.text = name
+//        binding.latestFoodCalorie.text = calories
+//        for (i in 1..foodData.lastIndex) {
+//            if(name == foodData[i].name){
+//                image = foodData[i].image
+//            }
+//        }
+//        Glide.with(this)
+//            .load(image)
+//            .apply(RequestOptions().override(120,240))
+//            .into(binding.latestFoodImage)
 
-        }
 
         homeViewModel.dataItem.observe(viewLifecycleOwner,{news ->
             binding.articleTitle.text = news[0].title
