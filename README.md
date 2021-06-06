@@ -9,7 +9,7 @@ Everyone has different calorie needs every day. It's hard to count the calories 
 This application will contains up to three task:
 1. Login
 2. Take photo of the food and scanning
-3. Display calories
+3. Display food calories from scanning result
 
 The greatest challenge in achieving good performance in this task seemed to be working with unbalanced and limited datasets, it needs a lot of pre-processing. Also high performance in food image detection with mobile phone camera is very difficult to achieve within one month period, which was a lesson learned during this project. And lastly, the current result can’t be applied in many kinds of food, only varies at most 20 types of food
 
