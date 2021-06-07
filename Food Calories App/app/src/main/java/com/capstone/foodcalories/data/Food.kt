@@ -5,6 +5,7 @@ data class Food(
     var name: String = "",
     var image: Int = 0,
     var calorie: Int = 0,
+    var realName:String ="",
     var calorieTarget: Int = 0,
     var date: String = ""
 

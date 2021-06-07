@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.capstone.foodcalories.data.Food
 import com.capstone.foodcalories.data.FoodHistory
 import com.capstone.foodcalories.databinding.HistoryRowBinding
 
@@ -17,12 +18,12 @@ class HistoryAdapter(private var list: ArrayList<FoodHistory>) :
 
         val foodName = binding.tvFoodName
         val foodCalorie = binding.tvCalorie
-        val calorieTarget = binding.tvCalorieTarget
+//        val calorieTarget = binding.tvCalorieTarget
         val date = binding.date
 
         fun bind(food: FoodHistory) {
             Glide.with(itemView)
-                .load(food.foodImage)
+                .load(food.image!!.toInt())
                 .into(binding.foodImage)
         }
 
@@ -41,7 +42,7 @@ class HistoryAdapter(private var list: ArrayList<FoodHistory>) :
         holder.calorieTarget.text = list[position].calorieTarget
         holder.date.text = list[position].date
 
-        holder.bind(this.list[position])
+        holder.bind(list[position])
     }
 
     override fun getItemCount(): Int {

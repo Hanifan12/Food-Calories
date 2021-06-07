@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Food-Calories/Food Calories App/app/src/main/res/drawable-v24/ic_broken_image_black.xml" value="0.15185185185185185" />
+        <entry key="..\:/Food-Calories/Food Calories App/app/src/main/res/drawable-v24/ic_error.xml" value="0.23692307692307693" />
+        <entry key="..\:/Food-Calories/Food Calories App/app/src/main/res/drawable-v24/ic_loading.xml" value="0.12239583333333333" />
         <entry key="..\:/Food-Calories/Food Calories App/app/src/main/res/layout/activity_camera.xml" value="0.14673913043478262" />
         <entry key="..\:/Food-Calories/Food Calories App/app/src/main/res/layout/fragment_history.xml" value="0.22" />
         <entry key="..\:/Food-Calories/Food Calories App/app/src/main/res/layout/history_row.xml" value="0.1" />

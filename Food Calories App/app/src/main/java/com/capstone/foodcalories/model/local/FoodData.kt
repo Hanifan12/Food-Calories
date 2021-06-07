@@ -10,7 +10,8 @@ object FoodData {
             Food(1,
                 "ice_cream",
                 R.drawable.ice_cream,
-                208
+                208,
+                "Ice Cream"
             )
         )
 
@@ -18,7 +19,8 @@ object FoodData {
             Food(2,
                 "chicken_wings",
                 R.drawable.wings,
-                220
+                220,
+                "Chicken Wings"
 
             )
         )
@@ -27,126 +29,162 @@ object FoodData {
             Food(3,
             "spaghetti",
             R.drawable.spaghetti,
-            157)
+            157,
+                "Spaghetti"
+            )
         )
 
         foods.add(
             Food(4,
                 "caesar_salad",
-                R.drawable.spaghetti,
-                44)
+                R.drawable.caesar_salad,
+                44,
+                "Caesar Salad"
+            )
         )
 
         foods.add(
             Food(5,
                 "club_sandwich",
-                R.drawable.spaghetti,
-                221)
+                R.drawable.sandwich,
+                221,
+                "Sandwich"
+            )
         )
 
         foods.add(
             Food(6,
                 "cup_cakes",
-                R.drawable.spaghetti,
-                305)
+                R.drawable.cup_cakes,
+                305,
+                "Cup Cakes"
+            )
         )
 
         foods.add(
             Food(7,
                 "donuts",
-                R.drawable.spaghetti,
-                452)
+                R.drawable.donuts,
+                452,
+                "Donuts"
+            )
         )
 
         foods.add(
             Food(8,
                 "dumplings",
-                R.drawable.spaghetti,
-                112)
+                R.drawable.dumplings,
+                112,
+                "Dumplings"
+            )
         )
 
         foods.add(
             Food(9,
                 "french_fries",
-                R.drawable.spaghetti,
-                165)
+                R.drawable.french_fry,
+                165,
+            "French Fries"
+            )
         )
 
         foods.add(
             Food(10,
                 "fried_rice",
-                R.drawable.spaghetti,
-                163)
+                R.drawable.fried_rice,
+                163,
+                "Fried Rice"
+            )
         )
 
         foods.add(
             Food(11,
                 "hamburger",
-                R.drawable.spaghetti,
-                294)
+                R.drawable.hamburger,
+                294,
+                "Hamburger"
+            )
         )
 
         foods.add(
             Food(12,
                 "omelette",
-                R.drawable.spaghetti,
-                154)
+                R.drawable.omelette,
+                154,
+                "Omelette"
+            )
         )
 
         foods.add(
             Food(13,
                 "pizza",
-                R.drawable.spaghetti,
-                266)
+                R.drawable.pizza,
+                266,
+                "Pizza"
+            )
         )
 
         foods.add(
             Food(14,
                 "spring_rolls",
-                R.drawable.spaghetti,
-                153)
+                R.drawable.spring_rolls,
+                153,
+                "Spring Rolls"
+            )
         )
 
         foods.add(
             Food(15,
                 "pancakes",
-                R.drawable.spaghetti,
-                227)
+                R.drawable.pancakes,
+                227,
+                "Pancakes"
+            )
         )
 
         foods.add(
             Food(16,
                 "steak",
-                R.drawable.spaghetti,
-                271)
+                R.drawable.steak,
+                271,
+                "Steak"
+            )
         )
 
         foods.add(
             Food(17,
                 "sushi",
-                R.drawable.spaghetti,
-                143)
+                R.drawable.sushi,
+                143,
+                "Sushi"
+            )
         )
 
         foods.add(
             Food(18,
                 "takoyaki",
-                R.drawable.spaghetti,
-                175)
+                R.drawable.takoyaki,
+                175,
+                "Takoyaki"
+            )
         )
 
         foods.add(
             Food(19,
                 "waffles",
-                R.drawable.spaghetti,
-                291)
+                R.drawable.waffles,
+                291,
+                "Waffles"
+            )
         )
 
         foods.add(
             Food(20,
                 "onion_rings",
-                R.drawable.spaghetti,
-                411)
+                R.drawable.onion_rings,
+                411,
+            "Onion Rings"
+            )
         )
         return foods
     }

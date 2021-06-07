@@ -13,6 +13,9 @@ import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.capstone.foodcalories.R
 import com.capstone.foodcalories.data.Food
 import com.capstone.foodcalories.data.FoodHistory
 import com.capstone.foodcalories.databinding.FragmentHomeBinding
@@ -31,29 +34,8 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private var link = ""
-    private var image = ""
-    private lateinit var list: ArrayList<FoodHistory>
 
-
-    //    private fun getUserData(){
-//
-//        val database = FirebaseDatabase.getInstance()
-//        val myRef = database.getReference("FoodHistory")
-//        val userId = FirebaseAuth.getInstance().currentUser!!.uid
-//        myRef.child(userId).addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                list = snapshot.getValue(FoodHistory)
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                // Failed to read value
-//                Log.w("firebase", "Failed to read value.", error.toException())
-//            }
-//        })
-//    }
     private var currentCalorie = 0
-    private var latestFoodCalorie = ""
-    private var latestFoodTitle = ""
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -65,18 +47,6 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-//        val foodData = FoodData.generateFoodData()
-//        binding.latestFoodTitle.text = name
-//        binding.latestFoodCalorie.text = calories
-//        for (i in 1..foodData.lastIndex) {
-//            if(name == foodData[i].name){
-//                image = foodData[i].image
-//            }
-//        }
-//        Glide.with(this)
-//            .load(image)
-//            .apply(RequestOptions().override(120,240))
-//            .into(binding.latestFoodImage)
 
         val hasil = arguments?.getString("hasil")
         if (hasil == null) {
@@ -123,7 +93,7 @@ class HomeFragment : Fragment() {
                     val model = data.getValue(FoodHistory::class.java)
                     list.add(model as FoodHistory)
 
-                    if (list.size > 0) {
+                    if (list.size >= 0) {
                         for (i in 0 until list.size) {
                             currentCalorie += model.calories!!.toInt()
                         }
@@ -144,38 +114,34 @@ class HomeFragment : Fragment() {
     }
 
     private fun getLatestFood() {
-        val user = FirebaseAuth.getInstance().currentUser
-        val userUid = user!!.uid
 
-        val myRef = FirebaseDatabase.getInstance().getReference("FoodHistory").child(userUid)
+
+        val user = FirebaseAuth.getInstance().currentUser!!.uid
+
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("FoodHistory")
         val list = ArrayList<FoodHistory>()
 
 
-        myRef.addValueEventListener(object : ValueEventListener {
+        myRef.child(user).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 currentCalorie = 0
                 for (data in snapshot.children) {
                     val model = data.getValue(FoodHistory::class.java)
                     list.add(0, FoodHistory())
-
-                    if (model!!.name == "ice_cream") {
-                        model.name = "Ice Cream"
-                    }
-
-                    if (model.name == "spaghetti") {
-                        model.name = "Spaghetti"
-                    }
-
-                    if (model.name == "chicken_wings") {
-                        model.name = "Chicken Wings"
-                    }
-
-                    latestFoodTitle = model.name.toString()
-                    latestFoodCalorie = model.calories.toString()
+                    binding.latestFoodTitle.text = model!!.name.toString()
+                    binding.latestFoodCalorie.text = model.calories.toString()
+                    Glide.with(this@HomeFragment)
+                        .load(model.image!!.toInt())
+                        .transform(RoundedCorners(20))
+                        .apply(
+                            RequestOptions.placeholderOf(R.drawable.ic_loading)
+                                .error(R.drawable.ic_error)
+                        )
+                        .into(binding.latestFoodImage)
                 }
 
-                binding.latestFoodTitle.text = latestFoodTitle
-                binding.latestFoodCalorie.text = latestFoodCalorie
+
             }
 
             override fun onCancelled(error: DatabaseError) {

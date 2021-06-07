@@ -20,11 +20,8 @@ import com.capstone.foodcalories.databinding.ActivityMainBinding
 import com.capstone.foodcalories.model.local.FoodData
 import com.capstone.foodcalories.ui.settings.SettingsActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -37,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var calories = ""
+    private var image = 0
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("FoodHistory")
         val navView: BottomNavigationView = binding.navView
-
+        val localData = FoodData.generateFoodData()
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
@@ -60,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val makanan = intent.getStringExtra(EXTRA_FOOD)
+        var makanan = intent.getStringExtra(EXTRA_FOOD)
 
         if(makanan == "extra" || makanan == null  || makanan =="""""" || makanan ==""){
             Log.e("MainActivity","Gagal Load Data makanan dan calories")
@@ -72,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     break
                 }
             }
-            val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
+            val currentUser = FirebaseAuth.getInstance().currentUser!!.uid.trim()
             val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 LocalDateTime.now()
             } else {
@@ -80,7 +78,13 @@ class MainActivity : AppCompatActivity() {
             }
             val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
             val timeFormat = current.format(formatter).toString()
-            val formData = FoodHistory(makanan,calories,currentUser,timeFormat)
+            for(i in 1..localData.lastIndex){
+                if(makanan == localData[i].name){
+                    makanan = localData[i].realName
+                    image = localData[i].image
+                }
+            }
+            val formData = FoodHistory(makanan,calories,image.toString(),timeFormat)
             val foodId = myRef.push().key
                 myRef.child(currentUser).child(foodId!!).setValue(formData).addOnCompleteListener {
                     Toast.makeText(

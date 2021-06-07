@@ -54,6 +54,7 @@ typealias RecognitionListener = (recognition: List<Recognition>) -> Unit
  * Main entry point into TensorFlow Lite Classifier
  */
 
+
 class CameraActivity : AppCompatActivity() {
 
     // CameraX variables
@@ -100,14 +101,21 @@ class CameraActivity : AppCompatActivity() {
         recogViewModel.recognitionList.observe(this,
             {
                 viewAdapter.submitList(it)
-                if(confident[0] >= '3') {
-                    val intent = Intent(this@CameraActivity,MainActivity::class.java)
-                    intent.putExtra(MainActivity.EXTRA_FOOD, makanan )
-                    startActivity(intent)
+                if(confident.substring(0,2).toInt() >= 35) {
+                   pindahActivity(confident.substring(0,2).toInt())
                 }
+
             }
 
         )
+    }
+
+    fun pindahActivity(hasil:Int){
+        if(hasil >= 35) {
+            val intent = Intent(this@CameraActivity, MainActivity::class.java)
+            intent.putExtra(MainActivity.EXTRA_FOOD, makanan)
+            startActivity(intent)
+        }
     }
 
     /**
@@ -196,6 +204,7 @@ class CameraActivity : AppCompatActivity() {
 
     }
 
+
     private class ImageAnalyzer(ctx: Context, private val listener: RecognitionListener) :
         ImageAnalysis.Analyzer {
 
@@ -240,11 +249,6 @@ class CameraActivity : AppCompatActivity() {
             listener(items.toList())
             makanan = items[0].label
             confident = items[0].probabilityString
-
-            // Close the image,this tells CameraX to feed the next image to the analyzer
-            imageProxy.close()
-
-
 
         }
 

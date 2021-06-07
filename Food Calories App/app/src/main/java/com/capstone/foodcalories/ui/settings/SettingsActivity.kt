@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import com.capstone.foodcalories.R
 import android.content.SharedPreferences
-import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import com.capstone.foodcalories.data.Food
