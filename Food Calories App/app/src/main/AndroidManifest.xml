@@ -4,11 +4,12 @@
     package="com.capstone.foodcalories">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,7 +18,7 @@
         android:theme="@style/Theme.FoodCalories"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".ui.signin.SigninActivity"
+            android:name=".ui.activity.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/Theme.FoodCalories.NoActionBar">
             <intent-filter>
@@ -27,9 +28,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.signin.SigninActivity"
+            android:exported="true"
+            android:theme="@style/Theme.FoodCalories.NoActionBar">
+        </activity>
+        <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="true"
-            android:theme="@style/Theme.FoodCalories.NoActionBar"/>
+            android:theme="@style/Theme.FoodCalories.NoActionBar" />
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:exported="true"
@@ -40,9 +46,8 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:exported="true"
-            android:label="@string/app_name">
+            android:label="@string/app_name"/>
 
-        </activity>
         <meta-data
             android:name="firebase_performance_logcat_enabled"
             android:value="true" />

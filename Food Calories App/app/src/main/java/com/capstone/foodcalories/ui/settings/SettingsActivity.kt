@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import com.capstone.foodcalories.R
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import com.capstone.foodcalories.data.Food
@@ -60,7 +61,6 @@ class SettingsActivity : AppCompatActivity() {
         private fun setCalorieTarget(calorieTarget: String) {
             val food = Food(calorieTarget = 0)
             val ct = calorieTarget.toInt()
-
         }
     }
 }

@@ -39,7 +39,7 @@ class HistoryAdapter(private var list: ArrayList<FoodHistory>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.foodName.text = list[position].name
         holder.foodCalorie.text = list[position].calories
-        holder.calorieTarget.text = list[position].calorieTarget
+//        holder.calorieTarget.text = list[position].calorieTarget
         holder.date.text = list[position].date
 
         holder.bind(list[position])
